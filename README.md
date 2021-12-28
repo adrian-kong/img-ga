@@ -11,8 +11,8 @@ Using faster math, log operations are estimates.
 ### Demo
 
 <p float="left">
-  <img src="./peng.png" width="100" />
-  <img src="/img.png" width="100" /> 
+  <img src="./peng.png" width="250" />
+  <img src="/img.png" width="250" /> 
 </p>
 
 ### Build
