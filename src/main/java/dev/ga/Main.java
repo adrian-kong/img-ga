@@ -24,6 +24,11 @@ public class Main {
         new Thread(() -> {
             while (true) {
                 SwingUtilities.updateComponentTreeUI(frame);
+                try {
+                    Thread.sleep(1);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         }).start();
     }

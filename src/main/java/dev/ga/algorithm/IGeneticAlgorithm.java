@@ -1,21 +1,12 @@
 package dev.ga.algorithm;
 
-public interface IGeneticAlgorithm {
+public interface IGeneticAlgorithm<E> {
 
-    /**
-     * Input data
-     */
-    void input();
+    void input(E data);
 
-    /**
-     * Output data
-     */
-    void output();
+    IGeneticAlgorithm<E> next();
 
-    /**
-     * Next generation
-     */
-    void next();
-
-
+    default IGeneticAlgorithm<E> current() {
+        return this;
+    }
 }
