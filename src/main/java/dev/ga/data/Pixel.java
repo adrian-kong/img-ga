@@ -18,17 +18,13 @@ public class Pixel implements IData<Pixel> {
     }
 
     @Override
-    public void crossOver(IData<?>[] data) {
-        for (IData<?> dat : data) {
-            if (dat instanceof Pixel pix) {
-                if (ThreadLocalRandom.current().nextBoolean()) {
-                    x = pix.getX();
-                }
+    public void crossOver(Pixel pix) {
+        if (ThreadLocalRandom.current().nextBoolean()) {
+            x = pix.getX();
+        }
 
-                if (ThreadLocalRandom.current().nextBoolean()) {
-                    y = pix.getY();
-                }
-            }
+        if (ThreadLocalRandom.current().nextBoolean()) {
+            y = pix.getY();
         }
     }
 }

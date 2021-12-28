@@ -15,9 +15,4 @@ public abstract class Gene implements IGene {
     public double computeFitness() {
         return fitness;
     }
-
-    @Override
-    public void mutate() {
-
-    }
 }

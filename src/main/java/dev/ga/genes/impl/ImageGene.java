@@ -12,6 +12,7 @@ import lombok.Setter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 @AllArgsConstructor
@@ -24,7 +25,7 @@ public class ImageGene extends Gene {
     private BufferedImage image;
 
     @Override
-    public IData<?>[] getData() {
+    public IData<Pixel>[] getData() {
         return positions;
     }
 
@@ -39,14 +40,30 @@ public class ImageGene extends Gene {
             var g = (rgb >> 8) & 0xff;
             var b = rgb & 0xff;
             double y = 0.2126 * r + 0.7152 * g + 0.0722 * b; // ITU BT.709 Photometric/digital luminance
-            fitness += y;
+            if (y != 0) {
+                fitness += Math.log(y);
+            }
         }
 
         return fitness;
     }
 
     @Override
+    public void mutate() {
+        for (Pixel pixel : positions) {
+            if (ThreadLocalRandom.current().nextDouble() > 0.8) {
+                pixel.setX(ThreadLocalRandom.current().nextInt(image.getWidth()));
+            }
+            if (ThreadLocalRandom.current().nextDouble() > 0.8) {
+                pixel.setY(ThreadLocalRandom.current().nextInt(image.getHeight()));
+            }
+        }
+    }
+
+    @Override
     public <T extends IGene> void crossOver(T gene) {
-        Arrays.stream(getData()).forEach(a -> a.crossOver(gene.getData()));
+        for (int i = 0; i < getData().length; i++) {
+            getData()[i].crossOver((Pixel) gene.getData()[i].getData());
+        }
     }
 }

@@ -4,6 +4,6 @@ public interface IData<E> {
 
     E getData();
 
-    void crossOver(IData<?>[] data);
+    void crossOver(E data);
 
 }
