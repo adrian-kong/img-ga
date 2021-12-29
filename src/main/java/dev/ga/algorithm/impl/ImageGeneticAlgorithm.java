@@ -19,13 +19,13 @@ public class ImageGeneticAlgorithm implements IGeneticAlgorithm<BufferedImage> {
 
     private final int populationSize = 100;
 
-    private final int maxPixels = 10000;
+    private final int maxPixels = 50_000;
 
     private final double mutationChance = 0.05d;
 
     private final IGene[] genes = new IGene[populationSize];
 
-    private final ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+    private final ThreadPoolExecutor threadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(12);
 
     @Override
     public void input(BufferedImage image) {
@@ -75,6 +75,6 @@ public class ImageGeneticAlgorithm implements IGeneticAlgorithm<BufferedImage> {
     }
 
     private void sortArray() {
-        Arrays.parallelSort(genes, Comparator.comparingDouble(IGene::getFitness));
+        Arrays.parallelSort(genes, Comparator.comparingDouble(IGene::getFitness).reversed());
     }
 }

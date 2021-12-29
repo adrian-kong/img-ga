@@ -41,6 +41,7 @@ public class ImageGene extends Gene {
             float y = 0.2126f * r + 0.7152f * g + 0.0722f * b; // ITU BT.709 Photometric/digital luminance
             if (y != 0) {
 //                fitness += y;
+//                fitness += Math.log(y);
                 fitness += MathUtils.log2(y);
             }
         }
@@ -51,10 +52,8 @@ public class ImageGene extends Gene {
     @Override
     public void mutate() {
         for (Pixel pixel : positions) {
-            if (ThreadLocalRandom.current().nextBoolean()) {
-                pixel.setX(ThreadLocalRandom.current().nextInt(image.getWidth()));
-                pixel.setY(ThreadLocalRandom.current().nextInt(image.getHeight()));
-            }
+            pixel.setX(ThreadLocalRandom.current().nextInt(image.getWidth()));
+            pixel.setY(ThreadLocalRandom.current().nextInt(image.getHeight()));
         }
     }
 

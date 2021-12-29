@@ -105,11 +105,15 @@ public class Frame {
     }
 
     private void drawRect(double x, double y) {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glColor4f(1, 1, 1, 0.3F);
+        double size = 3d;
         glBegin(GL_QUADS);
         glVertex2d(x, y);
-        glVertex2d(x, y + (double) 1);
-        glVertex2d(x + (double) 1, y + (double) 1);
-        glVertex2d(x + (double) 1, y);
+        glVertex2d(x, y + size);
+        glVertex2d(x + size, y + size);
+        glVertex2d(x + size, y);
         glEnd();
     }
 
