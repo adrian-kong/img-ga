@@ -4,11 +4,11 @@ import dev.ga.genes.IGene;
 
 public abstract class Gene implements IGene {
 
-    private double fitness = -1;
+    protected double fitness = -1;
 
     @Override
     public double getFitness() {
-        return fitness == -1 ? computeFitness() : fitness;
+        return fitness == -1 ? fitness = computeFitness() : fitness;
     }
 
     @Override

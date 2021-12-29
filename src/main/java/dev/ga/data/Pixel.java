@@ -21,9 +21,6 @@ public class Pixel implements IData<Pixel> {
     public void crossOver(Pixel pix) {
         if (ThreadLocalRandom.current().nextBoolean()) {
             x = pix.getX();
-        }
-
-        if (ThreadLocalRandom.current().nextBoolean()) {
             y = pix.getY();
         }
     }
