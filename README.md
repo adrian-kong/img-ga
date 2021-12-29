@@ -13,7 +13,7 @@ Using faster math (?), log operations are using LUT http://graphics.stanford.edu
 <p float="left">
   <img src="./peng.png" width="250" />
   <img src="/img.png" width="250" /> 
-  <img src="/img1.png" width="250" /> 
+  <img src="/img_1.png" width="250" /> 
 </p>
 
 ### Build
