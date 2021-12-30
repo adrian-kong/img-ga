@@ -31,6 +31,10 @@ public class Frame {
 
     private BufferedImage image;
 
+    public static void main(String[] args) {
+        new Frame().run();
+    }
+
     public void run() {
         try {
             image = ImageIO.read(new File("peng.png"));
