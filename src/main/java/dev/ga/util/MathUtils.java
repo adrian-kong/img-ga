@@ -6,6 +6,9 @@ public class MathUtils {
      * Logarithmic LUT IEEE 754 float
      * http://graphics.stanford.edu/~seander/bithacks.html#IntegerLogFloat
      */
+
+    /*
+
     private static final int[] logTable = new int[256];
 
     static {
@@ -13,6 +16,7 @@ public class MathUtils {
         for (int i = 2; i < 256; i++) logTable[i] = 1 + logTable[i / 2];
         logTable[0] = -1;
     }
+
 
     public static int log2(float f) {
         int x = Float.floatToIntBits(f);
@@ -26,4 +30,5 @@ public class MathUtils {
             else return (x >> 8 != 0) ? logTable[t] - 141 : logTable[x] - 149;
         }
     }
+     */
 }

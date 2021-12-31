@@ -1,29 +1,25 @@
 package dev.ga.genes.impl;
 
 import dev.ga.data.IData;
-import dev.ga.data.Pixel;
+import dev.ga.data.impl.Pixel;
 import dev.ga.genes.IGene;
 import dev.ga.genes.comp.Gene;
-import dev.ga.util.MathUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.IntStream;
+
+import static dev.ga.util.ImageUtil.getLuminance;
 
 @AllArgsConstructor
-public class ImageGene extends Gene {
+public class ImageGene extends Gene<BufferedImage> {
 
     @Getter
     @Setter
     private Pixel[] positions;
-
-    private BufferedImage image;
 
     @Override
     public IData<Pixel>[] getData() {
@@ -31,26 +27,18 @@ public class ImageGene extends Gene {
     }
 
     @Override
-    public double computeFitness() {
-        fitness = 0;
-        for (Pixel pixel : positions) {
-            int rgb = image.getRGB(pixel.getX(), pixel.getY());
-            var r = (rgb >> 16) & 0xff;
-            var g = (rgb >> 8) & 0xff;
-            var b = rgb & 0xff;
-            float y = 0.2126f * r + 0.7152f * g + 0.0722f * b; // ITU BT.709 Photometric/digital luminance
-            if (y != 0) {
-//                fitness += y;
-//                fitness += Math.log(y);
-                fitness += MathUtils.log2(y);
-            }
-        }
+    public void computeFitness(BufferedImage image) {
+        fitness = Arrays.stream(positions)
+                .parallel()
+                .mapToDouble(pix -> getLuminance(image, pix.getX(), pix.getY()))
+                .filter(lum -> lum != 0)
+                .map(Math::log)
+                .sum();
 
-        return fitness;
     }
 
     @Override
-    public void mutate() {
+    public void mutate(BufferedImage image) {
         for (Pixel pixel : positions) {
             pixel.setX(ThreadLocalRandom.current().nextInt(image.getWidth()));
             pixel.setY(ThreadLocalRandom.current().nextInt(image.getHeight()));

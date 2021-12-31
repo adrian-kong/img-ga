@@ -2,7 +2,7 @@ package dev.ga;
 
 import dev.ga.algorithm.impl.ImageGeneticAlgorithm;
 import dev.ga.data.IData;
-import dev.ga.data.Pixel;
+import dev.ga.data.impl.Pixel;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.*;
-import java.util.concurrent.Executors;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -111,8 +110,8 @@ public class Frame {
     private void drawRect(double x, double y) {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glColor4f(1, 1, 1, 0.3F);
-        double size = 3d;
+        glColor4f(1, 1, 1, 0.2F);
+        double size = 2d;
         glBegin(GL_QUADS);
         glVertex2d(x, y);
         glVertex2d(x, y + size);

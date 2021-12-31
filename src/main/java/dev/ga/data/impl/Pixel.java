@@ -1,5 +1,6 @@
-package dev.ga.data;
+package dev.ga.data.impl;
 
+import dev.ga.data.IData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

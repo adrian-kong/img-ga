@@ -2,7 +2,7 @@ package dev.ga.algorithm;
 
 public interface IGeneticAlgorithm<E> {
 
-    void input(E data);
+    void input(Class<?> clazz, E data);
 
     IGeneticAlgorithm<E> next();
 
